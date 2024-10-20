@@ -57,7 +57,15 @@ class SynthTiger(templates.Template):
             **config.get("corpus", {}),
         )
         # TODO_ Blööb
-        self.augment_vocab = open(config["corpus"]["args"][1]["augmentation_charset"], "r", encoding="utf-8").read().splitlines()[0]
+        self.augment_vocab = (
+            open(
+                config["corpus"]["args"][1]["augmentation_charset"],
+                "r",
+                encoding="utf-8",
+            )
+            .read()
+            .splitlines()[0]
+        )
         # TODO: blööb
         self.font = components.BaseFont(**config.get("font", {}))
         self.texture = components.Switch(
@@ -117,8 +125,18 @@ class SynthTiger(templates.Template):
         midground = np.random.rand() < self.midground
         fg_color, fg_style, mg_color, mg_style, bg_color = self._generate_color()
 
-        dummy_black_color = {'gray': 0, 'rgb': (0, 0, 0), 'alpha': 1.0, 'colorize': False}
-        dummy_white_color = {'gray': 255, 'rgb': (255, 255, 255), 'alpha': 1.0, 'colorize': False}
+        dummy_black_color = {
+            "gray": 0,
+            "rgb": (0, 0, 0),
+            "alpha": 1.0,
+            "colorize": False,
+        }
+        dummy_white_color = {
+            "gray": 255,
+            "rgb": (255, 255, 255),
+            "alpha": 1.0,
+            "colorize": False,
+        }
         fg_color = np.random.choice([fg_color, dummy_black_color])
         mg_color = np.random.choice([mg_color, dummy_white_color])
         bg_color = np.random.choice([bg_color, dummy_white_color])
@@ -185,7 +203,7 @@ class SynthTiger(templates.Template):
             [",".join(map(str, map(int, coord))) for coord in glyph_coords]
         )
 
-        #shard = str(idx // 10000)
+        # shard = str(idx // 10000)
         image_key = os.path.join("images", f"{idx}.jpg")
         mask_key = os.path.join("masks", f"{idx}.png")
         glyph_mask_key = os.path.join("glyph_masks", f"{idx}.png")
@@ -216,7 +234,7 @@ class SynthTiger(templates.Template):
             self.coords_file.close()
         if self.glyph_coord_output:
             self.glyph_coords_file.close()
-        with open('results/labels.json', 'w', encoding="utf-8") as f:
+        with open("results/labels.json", "w", encoding="utf-8") as f:
             json.dump(Labels, f, ensure_ascii=False)
 
     def _generate_color(self):
@@ -242,10 +260,11 @@ class SynthTiger(templates.Template):
                 label += np.random.choice(list(vocab))
         # check that all chars from label are in vocab
         if not all(c in vocab + string.ascii_letters for c in label):
-            raise RuntimeError("Not all chars from label are in vocab")
+            raise RuntimeError(
+                f"Not all chars from label are in vocab {label} vocab:{vocab + string.ascii_letters}"
+            )
         if len(label) > 25:
             raise RuntimeError("Label is too long")
-
 
         # for script using diacritic, ligature and RTL
         chars = utils.split_text(label, reorder=True)
@@ -315,7 +334,7 @@ def _blend_images(src, dst, visibility_check=False):
         if not visibility_check or _check_visibility(out, src[..., 3]):
             break
     else:
-        raise RuntimeError("Text is not visible")
+        raise RuntimeError(f"Text is not visible")
 
     return out
 
