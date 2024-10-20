@@ -18,7 +18,7 @@ corpus:
   args:
     # length augmentable corpus
     #- paths: [resources/corpus/german.txt, resources/corpus/synthtext.txt]
-    - paths: [resources/corpus/multilingual.txt, resources/corpus/vietnamese.txt]
+    - paths: [resources/corpus/vietnamese-all-multilingual.txt, resources/corpus/vietnamese.txt]
       weights: [1, 1]
       min_length: 1
       max_length: 30
@@ -26,7 +26,7 @@ corpus:
       augmentation: 0.3
       augmentation_length: [1, 25]
     # char augmentable corpus
-    - paths: [resources/corpus/multilingual.txt, resources/corpus/vietnamese.txt]
+    - paths: [resources/corpus/vietnamese-all-multilingual.txt, resources/corpus/vietnamese.txt]
       weights: [1, 1]
       min_length: 1
       max_length: 30
