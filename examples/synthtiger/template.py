@@ -259,10 +259,10 @@ class SynthTiger(templates.Template):
             for _ in range(np.random.randint(1, max_length)):
                 label += np.random.choice(list(vocab))
         # check that all chars from label are in vocab
-        if not all(c in vocab + string.ascii_letters for c in label):
-            raise RuntimeError(
-                f"Not all chars from label are in vocab {label} vocab:{vocab + string.ascii_letters}"
-            )
+        # if not all(c in vocab + string.ascii_letters for c in label):
+        #     raise RuntimeError(
+        #         f"Not all chars from label are in vocab {label} vocab:{vocab + string.ascii_letters}"
+        #     )
         if len(label) > 25:
             raise RuntimeError("Label is too long")
 

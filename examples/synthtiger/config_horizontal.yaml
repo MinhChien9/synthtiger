@@ -18,7 +18,7 @@ corpus:
   args:
     # length augmentable corpus
     #- paths: [resources/corpus/german.txt, resources/corpus/synthtext.txt]
-    - paths: [resources/corpus/Korean.txt, resources/corpus/Korean.txt]
+    - paths: [resources/corpus/Japanese.txt, resources/corpus/Japanese.txt]
       weights: [1, 1]
       min_length: 1
       max_length: 30
@@ -26,17 +26,17 @@ corpus:
       augmentation: 0.3
       augmentation_length: [1, 25]
     # char augmentable corpus
-    - paths: [resources/corpus/Korean.txt, resources/corpus/Korean.txt]
+    - paths: [resources/corpus/Japanese.txt, resources/corpus/Japanese.txt]
       weights: [1, 1]
       min_length: 1
       max_length: 30
       textcase: [lower, upper, capitalize]
       augmentation: 0.9
     #  augmentation_charset: resources/charset/alphanum_special.txt
-      augmentation_charset: resources/charset/none.txt
+      augmentation_charset: resources/charset/Japanese.txt
 
 font:
-  paths: [resources/font/korean]
+  paths: [resources/font/japanese]
   weights: [1]
   size: [20, 60]
   bold: 0.2
