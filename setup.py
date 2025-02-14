@@ -46,6 +46,7 @@ setup(
         "pyyaml",
         "regex",
         "scipy",
+        "tqdm"
     ],
     entry_points={
         "console_scripts": [
